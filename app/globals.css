@@ -59,7 +59,7 @@ button svg, .inline-icon { width: 18px; height: 18px; flex-shrink: 0; }
 .answer-mode-field { margin-top: 19px; }
 .answer-mode-toggle { grid-template-columns: repeat(2, minmax(0, 1fr))!important; }
 .learn-answer-mode { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; font-size: 16px; }
-.learn-answer-mode .levels { width: 220px; }
+.learn-answer-mode .levels { width: min(100%, 320px); }
 .learn-answer-mode p { color: var(--muted-foreground); font-size: 14px; }
 .choice-form { width: 100%; max-width: 580px; margin: 12px auto 0; }
 .answer-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; text-align: left; }
@@ -75,7 +75,8 @@ button svg, .inline-icon { width: 18px; height: 18px; flex-shrink: 0; }
 .live-arena .arena-label { flex-wrap: wrap; min-width: 0; }
 .setup-fields .stage-picker { grid-column: 1 / -1; }
 .answer-mode-field .level-description { display: block; }
-.answer-mode-toggle .level-choice { font-size: 14px; }
+.answer-mode-toggle .level-choice { font-size: 14px; height: auto; min-height: 48px; padding: 9px 6px; line-height: 1.35; white-space: normal; text-align: center; }
+.setup-fields .answer-mode-field { grid-column: 1 / -1; }
 @media (max-width: 420px) { .answer-choices { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 1000px) { .ladder-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .learning-ladder { padding: 16px; } .ladder-steps { grid-template-columns: minmax(0, 1fr); } .lesson-footer { flex-wrap: wrap; } }
@@ -362,7 +363,7 @@ kbd { border: 1px solid #47523f; border-bottom-width: 2px; padding: 3px 6px; bor
 .lesson-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
 .lesson-footer p { font-size: 13px; color: var(--muted-foreground); line-height: 1.7; }
 .lesson-footer button { font-size: 14px; }
-.lesson-exercise-top { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: #b4c79f; margin-bottom: 12px; }
+.lesson-exercise-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 12px; font-size: 14px; color: #b4c79f; margin-bottom: 12px; }
 .lesson-exercise>h3 { margin-top: 24px; font-size: 16px; line-height: 1.7; }
 .lesson-whole { margin-top: 20px; font-size: 16px; line-height: 1.8; color: #d4e8c0; }
 .lesson-completed-steps { list-style: none; margin: 16px 0; padding: 12px 16px; border-left: 2px solid #657e4c; background: #172012; color: #b1c49f; }

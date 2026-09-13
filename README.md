@@ -1,64 +1,106 @@
 # QuantGym
 
-面向心算与数量推理的浏览器练习工具，使用 React、TypeScript 和 Vite 构建。此独立版本可部署到 GitHub Pages，练习时无需账号、后端服务或数据库服务器。
+Build mental-math fluency and number-sequence reasoning with focused practice, step-by-step lessons, and a history that stays in your browser.
 
-## 功能
+**[Open QuantGym](https://ye0330.github.io/QuantGym/)** · [Deployment status](https://github.com/Ye0330/QuantGym/actions/workflows/pages.yml)
 
-- 冲刺、自适应、挑战、自由练习，以及历史记录、成绩统计和错题复习。
-- 心算题型可多选。`Mixed practice` 与单独题型互斥；选择 Mixed 会清除单独题型的勾选，取消最后一个单独题型会恢复 Mixed。
-- 可选择填空或选择题作答；数列题始终使用选择题，包括混合训练和错题复习中的数列题。
-- 中文技巧课采用“看示范 → 跟着做 → 独立练习”的流程，并保留三位数乘法学习阶梯：三位数 × 一位数、三位数 × 两位数、接近整百的乘法、一般三位数 × 三位数。
+QuantGym is a static React, TypeScript, and Vite application. Questions are generated and checked on your device. No account or backend service is required.
 
-## 本地运行
+## Practice
 
-需要 **Node.js 22.13.0 或更新版本**、**pnpm 11.19.0**。在项目根目录执行：
+| Mode | Session |
+| --- | --- |
+| Quick sprint | Two minutes; answer as many questions correctly as you can. |
+| Adaptive | Three minutes; focus on weaker skills, with difficulty adjusted every five questions. |
+| 80 in 8 | Up to 80 questions in eight minutes: +1 correct, −1 incorrect, 0 skipped. |
+| Free practice | 20 untimed questions, with worked explanations after mistakes and skips. |
+| Mistake retry | Revisit missed questions at your own pace. |
+
+Choose addition, subtraction, multiplication, division, percentages, fractions, decimal multiplication, decimal division, or sequences. Combine individual skills, or select **Mixed practice** to include them all. Mixed clears the individual selections; removing the last individual selection restores Mixed.
+
+Mental-math questions support **Typed answers** and **Multiple choice**, including lesson exercises and mistake retries. **Sequence practice** always offers four choices. Its six rule families cover constant differences, constant ratios, increasing differences, alternating steps, multiply-then-add rules, and interleaved sequences.
+
+Every session tracks all questions already shown, including wrong answers and skips. Swapped factors and equivalent fraction sums count as the same problem. If the selected question pool is exhausted, the session ends with your results.
+
+Answers are checked exactly. Enter integers, decimals, or fractions such as `3/4`; use an exact fraction for a repeating decimal.
+
+## Learn the techniques
+
+The 18 English lessons follow a simple progression: **worked example → guided steps → independent practice**. Exercises are untimed, with hints, explanations, and a distinction between independent answers and answers completed with help.
+
+The multiplication ladder builds up to general three-digit products:
+
+1. **3-digit × 1-digit:** split by place value and keep one running total.
+2. **3-digit × 2-digit:** add the tens product and the units product.
+3. **Near a multiple of 100:** calculate an easy product, then compensate.
+4. **3-digit × 3-digit:** combine manageable partial products one at a time.
+
+Each stage links to its own 20-question practice set. Other lessons cover rounding and compensation, useful multipliers, squares ending in 5, difference of squares, percentages, fractions, decimals, and sequence rules.
+
+## Your data
+
+Completed practice sessions are stored in **IndexedDB** in your browser. Training preferences use **localStorage**. QuantGym does not upload training records to a server or synchronize them between devices.
+
+Open **Local data** in the header to manage backups:
+
+- **Export all history** downloads a QuantGym JSON backup containing all saved sessions and any results still waiting to save.
+- **Import backup** validates the whole file before saving. Identical records are skipped; a conflicting record with the same UUID causes the import to fail without replacing existing history.
+- Finish the active session before importing. Imports retain your current training preferences, even when the backup includes preferences.
+- If browser storage cannot be read, a separate recovery export saves only the results accessible from the current page. It may omit older history.
+
+History and analytics display the **latest 100 sessions**. This display limit does not delete older stored records. A single backup supports up to **10,000 sessions and 50 MiB**; larger exports or imports report an error and leave stored records untouched.
+
+Records belong to the current device, browser profile, website origin, and deployment path. Clearing site data removes local history; private browsing may discard it when the window closes. Export a backup before clearing browser data or moving devices. Renaming the repository or changing the website address also changes which local records are accessible.
+
+The GitHub Pages edition cannot automatically read history from the original hosted Site. Importing old history requires a compatible QuantGym JSON backup. Older saved sequence explanations are displayed in English without rewriting the original records or their backup identities.
+
+## Run locally
+
+Requirements: **Node.js 22.13.0 or later** and **pnpm 11.19.0**.
 
 ```bash
+git clone https://github.com/Ye0330/QuantGym.git
+cd QuantGym
 npm install --global pnpm@11.19.0
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-打开终端显示的本地地址。检查与构建命令：
+Open the local address printed by Vite. Useful commands:
 
-```bash
-pnpm test
-pnpm build
-pnpm preview
-```
+| Command | Purpose |
+| --- | --- |
+| `pnpm test` | Check question generation, grading, lessons, session behavior, and backups. |
+| `pnpm build` | Run TypeScript checks and create the production files in `dist/`. |
+| `pnpm preview` | Serve the production build locally. |
 
-`pnpm build` 先进行 TypeScript 检查，再生成 `dist/`。通过开发或预览服务器打开页面；资源路径使用相对路径，可用于 `/quantgym/` 这样的仓库子路径。
+Use a local server to open the app. Asset paths are relative, so the build works at a repository subpath such as `/QuantGym/` as well as at a domain root.
 
-## 部署到 GitHub Pages
+## Deploy with GitHub Pages
 
-1. 在 GitHub 的 `Ye0330` 账号下创建名为 `QuantGym` 的 **Public** 空仓库，先不添加 README、`.gitignore` 或许可证。
-2. 将本项目全部源文件提交到该仓库的 `main` 分支，包括 `.github/workflows/pages.yml`、`package.json` 和 `pnpm-lock.yaml`。不要提交 `node_modules/`、个人 JSON 备份或本地浏览器数据。
-3. 在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。项目已包含工作流，无需另建模板。设置入口见 [GitHub Pages 官方说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
-4. 在 **Actions → Deploy QuantGym to GitHub Pages** 中运行工作流；之后每次向 `main` 推送都会自动部署。如果首次推送发生在 Pages 配置之前，配置完成后重新运行工作流。
-5. 工作流成功后，使用部署结果给出的地址；该仓库的默认地址为 [https://Ye0330.github.io/QuantGym/](https://Ye0330.github.io/QuantGym/)。
+To host your own copy:
 
-若从不含 Git 历史的源码包开始，可在项目根目录执行以下命令完成第 2 步；需要本机 Git 已能登录 GitHub：
+1. Fork this repository, or push its source to the `main` branch of your own repository. Include `.github/workflows/pages.yml` and `pnpm-lock.yaml`.
+2. Open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. The workflow is already included; no additional template is needed.
+3. Open **Actions → Deploy QuantGym to GitHub Pages → Run workflow**. Future pushes to `main` deploy automatically. If an earlier run failed before Pages was enabled, rerun the failed jobs.
+4. Wait for both the build and deployment jobs to succeed, then open the URL shown in the deployment result.
 
-```bash
-git init -b main
-git add .
-git commit -m "Add standalone QuantGym"
-git remote add origin https://github.com/Ye0330/QuantGym.git
-git push -u origin main
-```
+The workflow installs locked dependencies, runs the tests, builds the app, and deploys `dist/`. It uses GitHub's workflow token; no personal access token or application secrets are needed. Pages must be enabled once through the repository settings.
 
-部署工作流使用 Node.js 22 和项目声明的 pnpm 版本，依次安装锁定依赖、运行测试、构建、上传 `dist/`，最后部署到 `github-pages` 环境。部署任务使用 `pages: write` 和 `id-token: write`，由 Actions 提供运行令牌，无需配置个人访问令牌。工作流要求见 [GitHub 自定义 Pages 工作流说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+See GitHub's [publishing-source setup](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [custom Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-## 数据保存与备份
+Do not commit `node_modules/`, personal JSON backups, browser data, or environment files. The app has no cloud database or account service to configure.
 
-练习记录保存在当前浏览器的 **IndexedDB**，训练偏好保存在 **localStorage**。应用没有云端同步。存储按网站来源和部署路径区分，例如 `/quantgym/` 与另一个仓库路径各有独立记录；本地开发地址和正式网站也互不共享数据。
+## Project structure
 
-- 历史列表与统计使用最近 **100** 次练习；此显示限制不会删除更早的已存记录。
-- 页面中的数据备份功能可导出、导入 QuantGym JSON 文件。正常导出包含**全部已存记录及尚未成功保存的结果**，不限于列表中的 100 次。单份备份最多 **10,000** 次练习、**50 MiB**；超限会报错，原记录保持不变。
-- 导入会合并记录：同一 UUID 且内容相同的记录跳过；同一 UUID 但内容冲突，或文件中有无效记录时，整次导入被拒绝，现有记录保留。请先结束正在进行的练习再导入。
-- 备份包含有效的训练偏好，但导入**保留当前训练偏好**，仅合并练习记录。
-- 浏览器存储读取失败时，页面提供恢复导出；它只包含当前打开页面可访问的记录，可能缺少更早的数据，不能视为完整备份。
+| Path | Contents |
+| --- | --- |
+| `components/quantgym.tsx` | Practice, results, analytics, mistake review, and backup controls. |
+| `components/quant-learn.tsx` | Worked examples and interactive lesson exercises. |
+| `lib/quant-engine.ts` | Question generation, exact answers, timing, scoring, and session deduplication. |
+| `lib/quant-lessons.ts` / `lib/multiplication-lessons.ts` | Lesson content and multiplication stages. |
+| `lib/local-data.ts` | Local history storage, backup validation, and atomic imports. |
+| `tests/` | Behavioral and mathematical checks. |
+| `.github/workflows/pages.yml` | GitHub Pages build and deployment. |
 
-记录只属于当前设备、浏览器和浏览器配置文件。清除网站数据、更换浏览器或设备会使记录不可见；无痕窗口关闭后数据可能被清除。可通过 JSON 导出、导入在设备间迁移，清理浏览器数据前请先保存备份。
-
-GitHub Pages 与原 Site 使用不同来源，无法自动读取原 Site 的云端历史。迁移旧记录需要先从原站取得兼容的 QuantGym JSON 备份，再在此版本导入。
+QuantGym uses original practice questions and its own presets. It is not affiliated with a trading firm or assessment provider. Third-party notices are included in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); they do not assign a license to QuantGym's original code.

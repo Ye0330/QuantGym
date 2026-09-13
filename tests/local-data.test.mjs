@@ -14,7 +14,7 @@ function session(number = 1, attemptCount = 3) {
       question: {
         id: `question-${index}`, category: 'addition', level: 2,
         expression: `${index} + 2`, answer: { n: index + 2, d: 1 },
-        explanation: 'Add two. 加上二。',
+        explanation: 'Add two. Keep an exact answer: ½ + 1½ = 2.',
       },
       input: index % 3 === 2 ? '' : index % 3 === 1 ? '-1' : String(index + 2),
       correct: index % 3 === 0, skipped: index % 3 === 2, ms: 50,

@@ -5,57 +5,57 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
     "id": "triple-single",
     "category": "multiplication",
     "level": 1,
-    "title": "第 1 阶：三位数 × 一位数",
-    "summary": "按百、十、个拆开；每算完一块，就更新总数。",
-    "when": "先会个位数乘法，再练三位数乘一个个位数。这是后面三个台阶的基础。",
-    "rule": "237 × 6 = 200 × 6 + 30 × 6 + 7 × 6。先算高位，把后面的结果分成整百、整十和个位，逐块加入。",
-    "memory": "脑中保留一个累计总数和正在处理的一块。遇到进位，先凑到下一个整十或整百，再继续。练习时可以先写下总数，熟悉后再口算。",
-    "pitfall": "30 × 6 是 180，不能漏掉十位的零。总数跨过整百时，百位也要更新；不要只改最后两位。",
+    "title": "Stage 1: Three digits × one digit",
+    "summary": "Split the number into hundreds, tens, and ones. Update one running total after each part.",
+    "when": "Start here once single-digit multiplication feels comfortable. Multiplying a three-digit number by one digit is the foundation for the next three stages.",
+    "rule": "237 × 6 = 200 × 6 + 30 × 6 + 7 × 6. Work from the largest place value down. Split each product into easy amounts before adding it to your total.",
+    "memory": "Keep only the running total and the part you are working on in mind. When an addition crosses a ten or a hundred, reach that round number first, then add the rest. Write down the total at first if it helps; work mentally as the steps become familiar.",
+    "pitfall": "30 × 6 is 180: keep the zero that represents the tens. When a sum crosses a hundred, update the hundreds digit too, rather than just the last two digits.",
     "example": {
       "expression": "237 × 6",
       "answer": "1422",
       "steps": [
         {
-          "title": "先算百位",
+          "title": "Start with the hundreds",
           "calculation": "200 × 6",
           "answer": "1200",
-          "explanation": "237 = 200 + 30 + 7。先把总数记为 1,200。"
+          "explanation": "237 = 200 + 30 + 7. Set your running total to 1,200."
         },
         {
-          "title": "算十位这一块",
+          "title": "Multiply the tens",
           "calculation": "30 × 6",
           "answer": "180",
-          "explanation": "3 × 6 = 18；原来是 3 个十，所以得到 180。"
+          "explanation": "3 × 6 = 18. These are 3 tens, so the product is 180."
         },
         {
-          "title": "十位块先加 100",
+          "title": "Add the first 100",
           "calculation": "1200 + 100",
           "answer": "1300",
-          "explanation": "把 180 拆成 100 + 80，先更新总数。"
+          "explanation": "Split 180 into 100 + 80. Add 100 to update your total."
         },
         {
-          "title": "再加余下的 80",
+          "title": "Add the remaining 80",
           "calculation": "1300 + 80",
           "answer": "1380",
-          "explanation": "现在百位和十位都算完了，总数是 1,380。"
+          "explanation": "The hundreds and tens are now included. Your total is 1,380."
         },
         {
-          "title": "算个位这一块",
+          "title": "Multiply the ones",
           "calculation": "7 × 6",
           "answer": "42",
-          "explanation": "把 42 拆成 40 + 2，再往总数里加。"
+          "explanation": "Split 42 into 40 + 2, ready to add to your total."
         },
         {
-          "title": "加 40，处理进位",
+          "title": "Add 40 across the next hundred",
           "calculation": "1380 + 40",
           "answer": "1420",
-          "explanation": "80 + 40 = 120，要向百位进 1。也可以先加 20 到 1,400，再加 20。"
+          "explanation": "80 + 40 = 120, so carry 1 into the hundreds. You can add 20 to reach 1,400, then another 20."
         },
         {
-          "title": "补上最后的 2",
+          "title": "Add the final 2",
           "calculation": "1420 + 2",
           "answer": "1422",
-          "explanation": "总数更新为 1,422，这就是整题答案。"
+          "explanation": "Update your total to 1,422. This is the answer to the whole problem."
         }
       ]
     },
@@ -64,46 +64,46 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       "answer": "1144",
       "steps": [
         {
-          "title": "先算百位",
+          "title": "Start with the hundreds",
           "calculation": "200 × 4",
           "answer": "800",
-          "explanation": "286 = 200 + 80 + 6。把总数记为 800。"
+          "explanation": "286 = 200 + 80 + 6. Set your running total to 800."
         },
         {
-          "title": "算十位这一块",
+          "title": "Multiply the tens",
           "calculation": "80 × 4",
           "answer": "320",
-          "explanation": "8 × 4 = 32，再乘 10。把这一块拆成 300 + 20。"
+          "explanation": "8 × 4 = 32, then multiply by 10. Split the result into 300 + 20."
         },
         {
-          "title": "加整百，跨过一千",
+          "title": "Add 300 across the next thousand",
           "calculation": "800 + 300",
           "answer": "1100",
-          "explanation": "800 加 200 到 1,000，再加剩下的 100。"
+          "explanation": "Add 200 to reach 1,000, then add the remaining 100."
         },
         {
-          "title": "补上 20",
+          "title": "Add the remaining 20",
           "calculation": "1100 + 20",
           "answer": "1120",
-          "explanation": "当前总数更新为 1,120。"
+          "explanation": "Update your running total to 1,120."
         },
         {
-          "title": "算个位这一块",
+          "title": "Multiply the ones",
           "calculation": "6 × 4",
           "answer": "24",
-          "explanation": "把 24 拆成 20 + 4。"
+          "explanation": "Split 24 into 20 + 4."
         },
         {
-          "title": "先加 20",
+          "title": "Add 20 first",
           "calculation": "1120 + 20",
           "answer": "1140",
-          "explanation": "一次只更新一个小部分。"
+          "explanation": "Update your total with one small amount at a time."
         },
         {
-          "title": "再加 4",
+          "title": "Then add 4",
           "calculation": "1140 + 4",
           "answer": "1144",
-          "explanation": "百、十、个都已处理完，得到 1,144。"
+          "explanation": "The hundreds, tens, and ones are all included. Your answer is 1,144."
         }
       ]
     },
@@ -111,17 +111,17 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       {
         "expression": "123 × 4",
         "answer": "492",
-        "explanation": "先算 400，再加 80 得 480，最后加 12 得 492。"
+        "explanation": "Start with 400. Add 80 to get 480, then add 12 to get 492."
       },
       {
         "expression": "248 × 3",
         "answer": "744",
-        "explanation": "600 + 120 = 720；8 × 3 = 24，720 → 740 → 744。"
+        "explanation": "600 + 120 = 720. The ones give 8 × 3 = 24. Add in steps: 720 → 740 → 744."
       },
       {
         "expression": "367 × 7",
         "answer": "2569",
-        "explanation": "先算 2,100；再加 420：2,500 → 2,520；最后加 49：2,560 → 2,569。"
+        "explanation": "Start with 2,100. Add 420 in steps: 2,500 → 2,520. Then add 49: 2,560 → 2,569."
       }
     ],
     "multiplicationStage": "triple-single"
@@ -130,57 +130,57 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
     "id": "triple-double",
     "category": "multiplication",
     "level": 2,
-    "title": "第 2 阶：三位数 × 两位数",
-    "summary": "把两位数拆成整十和个位，每次只合并一块。",
-    "when": "能稳稳算三位数 × 一位数后，再把乘数扩展到两位数。",
-    "rule": "237 × 46 = 237 × 40 + 237 × 6。乘 40 时，先乘 4，再乘 10；个位块算好后，分小步加到主结果。",
-    "memory": "先固定整十块的总数，再算个位块。加 1,422 时，按 +1,000、+400、+20、+2 更新总数，不用一次完成大加法。",
-    "pitfall": "乘 40 不等于乘 4，要再乘 10。合并时按实际位值加，1,422 里的 4 表示 400。",
+    "title": "Stage 2: Three digits × two digits",
+    "summary": "Split the two-digit multiplier into tens and ones. Add one part at a time.",
+    "when": "Move to this stage when three digits × one digit feels reliable. You will use that same skill twice, with a two-digit multiplier.",
+    "rule": "237 × 46 = 237 × 40 + 237 × 6. To multiply by 40, multiply by 4 and then by 10. Once you have the ones product, add it to the main total in small steps.",
+    "memory": "Keep the tens product as your running total while you work out the ones product. To add 1,422, update the total with +1,000, +400, +20, and +2. You do not need to do the large addition in one step.",
+    "pitfall": "Multiplying by 40 requires a further × 10 after multiplying by 4. When combining products, respect place value: the 4 in 1,422 means 400.",
     "example": {
       "expression": "237 × 46",
       "answer": "10902",
       "steps": [
         {
-          "title": "40 = 4 × 10，先乘 4",
+          "title": "40 = 4 × 10: multiply by 4 first",
           "calculation": "237 × 4",
           "answer": "948",
-          "explanation": "沿用第 1 阶：800 + 120 + 28 = 948。"
+          "explanation": "Use Stage 1: 800 + 120 + 28 = 948."
         },
         {
-          "title": "再乘 10，固定主结果",
+          "title": "Multiply by 10 to set the total",
           "calculation": "948 × 10",
           "answer": "9480",
-          "explanation": "这一块对应 237 × 40，总数先记为 9,480。"
+          "explanation": "This is 237 × 40. Set your running total to 9,480."
         },
         {
-          "title": "算余下的个位块",
+          "title": "Multiply by the remaining 6",
           "calculation": "237 × 6",
           "answer": "1422",
-          "explanation": "这是第 1 阶例题的算法；把结果拆成 1,000 + 400 + 20 + 2。"
+          "explanation": "Use the method from the Stage 1 example. Split the result into 1,000 + 400 + 20 + 2."
         },
         {
-          "title": "先加 1,000",
+          "title": "Add 1,000 first",
           "calculation": "9480 + 1000",
           "answer": "10480",
-          "explanation": "总数跨过一万，更新为 10,480。"
+          "explanation": "The total passes ten thousand. Update it to 10,480."
         },
         {
-          "title": "再加 400",
+          "title": "Then add 400",
           "calculation": "10480 + 400",
           "answer": "10880",
-          "explanation": "总数更新为 10,880；个位块还剩 22。"
+          "explanation": "Your total is now 10,880. There is still 22 to add from the ones product."
         },
         {
-          "title": "加 20，凑到整百",
+          "title": "Add 20 to reach the next hundred",
           "calculation": "10880 + 20",
           "answer": "10900",
-          "explanation": "80 + 20 = 100，向百位进 1。"
+          "explanation": "80 + 20 = 100, so carry 1 into the hundreds."
         },
         {
-          "title": "最后补 2",
+          "title": "Add the final 2",
           "calculation": "10900 + 2",
           "answer": "10902",
-          "explanation": "已经把 1,422 全部加入，答案是 10,902。"
+          "explanation": "You have now added all of 1,422. The answer is 10,902."
         }
       ]
     },
@@ -189,46 +189,46 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       "answer": "9724",
       "steps": [
         {
-          "title": "先乘十位上的 3",
+          "title": "Multiply by the tens digit, 3",
           "calculation": "286 × 3",
           "answer": "858",
-          "explanation": "600 + 240 + 18 = 858；下一步恢复十位。"
+          "explanation": "600 + 240 + 18 = 858. The next step restores the tens place value."
         },
         {
-          "title": "恢复十位，乘 10",
+          "title": "Multiply by 10 for the tens",
           "calculation": "858 × 10",
           "answer": "8580",
-          "explanation": "286 × 30 = 8,580，把它作为累计总数。"
+          "explanation": "286 × 30 = 8,580. Use this as your running total."
         },
         {
-          "title": "算个位上的 4",
+          "title": "Multiply by the ones digit, 4",
           "calculation": "286 × 4",
           "answer": "1144",
-          "explanation": "这是第 1 阶跟练题。结果分成 1,000 + 100 + 40 + 4。"
+          "explanation": "This is the Stage 1 guided problem. Split the result into 1,000 + 100 + 40 + 4."
         },
         {
-          "title": "加 1,000",
+          "title": "Add 1,000",
           "calculation": "8580 + 1000",
           "answer": "9580",
-          "explanation": "总数更新为 9,580。"
+          "explanation": "Update your total to 9,580."
         },
         {
-          "title": "加 100",
+          "title": "Add 100",
           "calculation": "9580 + 100",
           "answer": "9680",
-          "explanation": "总数更新为 9,680。"
+          "explanation": "Update your total to 9,680."
         },
         {
-          "title": "加 40，处理进位",
+          "title": "Add 40 across the next hundred",
           "calculation": "9680 + 40",
           "answer": "9720",
-          "explanation": "先加 20 到 9,700，再加 20；百位从 6 更新为 7。"
+          "explanation": "Add 20 to reach 9,700, then another 20. The hundreds digit changes from 6 to 7."
         },
         {
-          "title": "补上 4",
+          "title": "Add the final 4",
           "calculation": "9720 + 4",
           "answer": "9724",
-          "explanation": "两块已经合并，得到 9,724。"
+          "explanation": "Both products are now included. The answer is 9,724."
         }
       ]
     },
@@ -236,17 +236,17 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       {
         "expression": "123 × 24",
         "answer": "2952",
-        "explanation": "主结果 123 × 20 = 2,460；个位块是 492。逐步加：2,860 → 2,950 → 2,952。"
+        "explanation": "Start with 123 × 20 = 2,460. The ones product is 492. Add in steps: 2,860 → 2,950 → 2,952."
       },
       {
         "expression": "248 × 36",
         "answer": "8928",
-        "explanation": "主结果是 7,440；个位块是 1,488。逐步加：8,440 → 8,840 → 8,920 → 8,928。"
+        "explanation": "Start with the tens product, 7,440. The ones product is 1,488. Add in steps: 8,440 → 8,840 → 8,920 → 8,928."
       },
       {
         "expression": "367 × 47",
         "answer": "17249",
-        "explanation": "主结果是 14,680；个位块是 2,569。逐步加：16,680 → 17,180 → 17,240 → 17,249。"
+        "explanation": "Start with the tens product, 14,680. The ones product is 2,569. Add in steps: 16,680 → 17,180 → 17,240 → 17,249."
       }
     ],
     "multiplicationStage": "triple-double"
@@ -255,51 +255,51 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
     "id": "triple-near-hundred",
     "category": "multiplication",
     "level": 3,
-    "title": "第 3 阶：接近整百的三位数乘法",
-    "summary": "先乘附近的整百数，再分小步加回或减去差额。",
-    "when": "两个因数都是三位数，而且一个因数接近 200、300、400 等整百数，例如 298 或 203。",
-    "rule": "237 × 298 = 237 × 300 − 237 × 2。乘 300 就是先乘 3，再乘 100；298 比 300 少 2，所以减去两份 237。",
-    "memory": "先保存整百块的总数，再求修正量。把 474 分成 400、70、4，逐次减；如果原乘数比整百数大，就逐次加。",
-    "pitfall": "修正量是另一个因数乘以差额，不能只减 2。298 凑成 300 后要减；203 凑成 200 后要加。",
+    "title": "Stage 3: Multiply near a round hundred",
+    "summary": "Multiply by a nearby round hundred, then add or subtract the adjustment in small steps.",
+    "when": "Use this when both factors have three digits and one is close to a round hundred such as 200, 300, or 400. Examples include 298 and 203.",
+    "rule": "237 × 298 = 237 × 300 − 237 × 2. To multiply by 300, multiply by 3 and then by 100. Since 298 is 2 less than 300, subtract two lots of 237.",
+    "memory": "Keep the round-hundred product as your running total, then work out the adjustment. Split 474 into 400, 70, and 4 and subtract one amount at a time. If the original multiplier is above the round hundred, add the adjustment instead.",
+    "pitfall": "The adjustment is the other factor multiplied by the difference: you cannot just subtract 2. Rounding 298 up to 300 means subtracting afterwards; using 200 for 203 means adding afterwards.",
     "example": {
       "expression": "237 × 298",
       "answer": "70626",
       "steps": [
         {
-          "title": "298 = 300 − 2，先乘 3",
+          "title": "298 = 300 − 2: multiply by 3 first",
           "calculation": "237 × 3",
           "answer": "711",
-          "explanation": "600 + 90 + 21 = 711；接着恢复百位。"
+          "explanation": "600 + 90 + 21 = 711. Next, restore the hundreds place value."
         },
         {
-          "title": "再乘 100，得到主结果",
+          "title": "Multiply by 100 to set the total",
           "calculation": "711 × 100",
           "answer": "71100",
-          "explanation": "237 × 300 = 71,100。把这个数作为累计总数。"
+          "explanation": "237 × 300 = 71,100. Use this as your running total."
         },
         {
-          "title": "求多算的两份",
+          "title": "Find the two extra lots",
           "calculation": "237 × 2",
           "answer": "474",
-          "explanation": "要减去 474，拆成 400 + 70 + 4。"
+          "explanation": "Subtract 474, split into 400 + 70 + 4."
         },
         {
-          "title": "先减 400",
+          "title": "Subtract 400 first",
           "calculation": "71100 − 400",
           "answer": "70700",
-          "explanation": "先减 100 到 71,000，再减 300 到 70,700；注意跨过整千时要退位。"
+          "explanation": "Subtract 100 to reach 71,000, then subtract another 300 to get 70,700. Take care as you cross the thousand."
         },
         {
-          "title": "再减 70",
+          "title": "Then subtract 70",
           "calculation": "70700 − 70",
           "answer": "70630",
-          "explanation": "可以想 700 − 70 = 630，前面的 70,000 保留。"
+          "explanation": "Think of 700 − 70 = 630, keeping the leading 70,000."
         },
         {
-          "title": "最后减 4",
+          "title": "Subtract the final 4",
           "calculation": "70630 − 4",
           "answer": "70626",
-          "explanation": "30 − 4 = 26，所以总数是 70,626。"
+          "explanation": "30 − 4 = 26, so your total is 70,626."
         }
       ]
     },
@@ -308,40 +308,40 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       "answer": "73892",
       "steps": [
         {
-          "title": "203 = 200 + 3，先乘 2",
+          "title": "203 = 200 + 3: multiply by 2 first",
           "calculation": "364 × 2",
           "answer": "728",
-          "explanation": "这一题比整百数多 3，最后要加回三份 364。"
+          "explanation": "The multiplier is 3 above the round hundred, so you will add three lots of 364 afterwards."
         },
         {
-          "title": "恢复百位，乘 100",
+          "title": "Multiply by 100 for the hundreds",
           "calculation": "728 × 100",
           "answer": "72800",
-          "explanation": "把 72,800 作为主结果。"
+          "explanation": "Set your running total to 72,800."
         },
         {
-          "title": "算少算的三份",
+          "title": "Find the three missing lots",
           "calculation": "364 × 3",
           "answer": "1092",
-          "explanation": "900 + 180 + 12 = 1,092，分成 1,000 + 90 + 2。"
+          "explanation": "900 + 180 + 12 = 1,092. Split this into 1,000 + 90 + 2."
         },
         {
-          "title": "加回 1,000",
+          "title": "Add 1,000",
           "calculation": "72800 + 1000",
           "answer": "73800",
-          "explanation": "总数更新为 73,800。"
+          "explanation": "Update your total to 73,800."
         },
         {
-          "title": "再加 90",
+          "title": "Then add 90",
           "calculation": "73800 + 90",
           "answer": "73890",
-          "explanation": "注意 1,092 的百位是 0，不需要加 100。"
+          "explanation": "The hundreds digit of 1,092 is 0. There is no 100 to add."
         },
         {
-          "title": "补上 2",
+          "title": "Add the final 2",
           "calculation": "73890 + 2",
           "answer": "73892",
-          "explanation": "修正完毕，得到 73,892；它应略大于 72,800。"
+          "explanation": "The adjustment is complete. Your answer is 73,892, which should be slightly above 72,800."
         }
       ]
     },
@@ -349,17 +349,17 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       {
         "expression": "426 × 198",
         "answer": "84348",
-        "explanation": "426 × 200 = 85,200，修正量是 852。逐步减：84,400 → 84,350 → 84,348。"
+        "explanation": "426 × 200 = 85,200. Subtract the adjustment, 852, in steps: 84,400 → 84,350 → 84,348."
       },
       {
         "expression": "318 × 402",
         "answer": "127836",
-        "explanation": "318 × 400 = 127,200，再加 636。逐步加：127,800 → 127,830 → 127,836。"
+        "explanation": "318 × 400 = 127,200. Add 636 in steps: 127,800 → 127,830 → 127,836."
       },
       {
         "expression": "247 × 597",
         "answer": "147459",
-        "explanation": "247 × 600 = 148,200，减去 247 × 3 = 741。逐步减：147,500 → 147,460 → 147,459。"
+        "explanation": "247 × 600 = 148,200. Subtract 247 × 3 = 741 in steps: 147,500 → 147,460 → 147,459."
       }
     ],
     "multiplicationStage": "triple-near-hundred"
@@ -368,87 +368,87 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
     "id": "triple-general",
     "category": "multiplication",
     "level": 3,
-    "title": "第 4 阶：一般三位数 × 三位数",
-    "summary": "把乘数拆成百、十、个，算完一块就并入总数。",
-    "when": "前面三阶能稳定完成后，用这条通用路线处理没有明显凑整机会的三位数乘法。先求稳，再提速。",
-    "rule": "237 × 346 = 237 × 300 + 237 × 40 + 237 × 6。先固定百位块；算十位块并立即合并；最后再算个位块并合并。",
-    "memory": "只保留一个累计总数和当前块：71,100 → 80,580 → 82,002。每次大加法继续拆成整千、整百、整十、个位，不同时记住三个乘积。",
-    "pitfall": "百位块乘完要乘 100，十位块乘完要乘 10。合并后就用新总数替换旧总数；下一块不能加回旧总数，也不能重复加入上一块。",
+    "title": "Stage 4: Any three digits × three digits",
+    "summary": "Split the multiplier into hundreds, tens, and ones. Add each product to your total as soon as it is ready.",
+    "when": "Use this general method once the first three stages feel reliable, especially when neither factor is close to a useful round number. Build accuracy before speed.",
+    "rule": "237 × 346 = 237 × 300 + 237 × 40 + 237 × 6. Start with the hundreds product. Work out the tens product and add it immediately. Only then work out and add the ones product.",
+    "memory": "Keep one running total and the current part: 71,100 → 80,580 → 82,002. Break each large addition into thousands, hundreds, tens, and ones. You do not need to hold all three products in mind at once.",
+    "pitfall": "After multiplying by the hundreds digit, multiply by 100; after multiplying by the tens digit, multiply by 10. Replace the old total with the new one after each addition. Do not return to the old total or add a completed part again.",
     "example": {
       "expression": "237 × 346",
       "answer": "82002",
       "steps": [
         {
-          "title": "拆出 300，先乘 3",
+          "title": "Split off 300: multiply by 3 first",
           "calculation": "237 × 3",
           "answer": "711",
-          "explanation": "346 = 300 + 40 + 6。先处理百位块。"
+          "explanation": "346 = 300 + 40 + 6. Start with the hundreds product."
         },
         {
-          "title": "乘 100，固定第一个总数",
+          "title": "Multiply by 100 to set the first total",
           "calculation": "711 × 100",
           "answer": "71100",
-          "explanation": "百位块是 71,100；总数先记为它。"
+          "explanation": "The hundreds product is 71,100. Use it as your starting total."
         },
         {
-          "title": "开始十位块，先乘 4",
+          "title": "Start the tens: multiply by 4",
           "calculation": "237 × 4",
           "answer": "948",
-          "explanation": "总数仍是 71,100；当前只处理 237 × 40。"
+          "explanation": "Keep the total at 71,100 while you work on 237 × 40."
         },
         {
-          "title": "乘 10，得到十位块",
+          "title": "Multiply by 10 for the tens product",
           "calculation": "948 × 10",
           "answer": "9480",
-          "explanation": "把 9,480 分成 9,000 + 400 + 80，马上并入总数。"
+          "explanation": "Split 9,480 into 9,000 + 400 + 80 and start adding it to your total."
         },
         {
-          "title": "十位块先加 9,000",
+          "title": "Add the first 9,000",
           "calculation": "71100 + 9000",
           "answer": "80100",
-          "explanation": "总数跨过八万，更新为 80,100。"
+          "explanation": "The total passes eighty thousand. Update it to 80,100."
         },
         {
-          "title": "再加 400",
+          "title": "Then add 400",
           "calculation": "80100 + 400",
           "answer": "80500",
-          "explanation": "总数更新为 80,500。"
+          "explanation": "Update your total to 80,500."
         },
         {
-          "title": "补上 80，十位块完成",
+          "title": "Add 80 to finish the tens product",
           "calculation": "80500 + 80",
           "answer": "80580",
-          "explanation": "现在只记新总数 80,580；百位块和十位块都已算完。"
+          "explanation": "Keep only the new total, 80,580. The hundreds and tens products are both included."
         },
         {
-          "title": "最后算个位块",
+          "title": "Now find the ones product",
           "calculation": "237 × 6",
           "answer": "1422",
-          "explanation": "把 1,422 拆成 1,000 + 400 + 20 + 2。"
+          "explanation": "Split 1,422 into 1,000 + 400 + 20 + 2."
         },
         {
-          "title": "个位块先加 1,000",
+          "title": "Add the first 1,000",
           "calculation": "80580 + 1000",
           "answer": "81580",
-          "explanation": "总数更新为 81,580。"
+          "explanation": "Update your total to 81,580."
         },
         {
-          "title": "再加 400",
+          "title": "Then add 400",
           "calculation": "81580 + 400",
           "answer": "81980",
-          "explanation": "总数更新为 81,980，还差 22。"
+          "explanation": "Update your total to 81,980. There is still 22 to add."
         },
         {
-          "title": "加 20，跨过整千",
+          "title": "Add 20 to reach the next thousand",
           "calculation": "81980 + 20",
           "answer": "82000",
-          "explanation": "980 + 20 = 1,000，向千位进 1，得到 82,000。"
+          "explanation": "980 + 20 = 1,000. Carry 1 into the thousands to get 82,000."
         },
         {
-          "title": "补上最后的 2",
+          "title": "Add the final 2",
           "calculation": "82000 + 2",
           "answer": "82002",
-          "explanation": "三块都已合并，最终答案是 82,002。"
+          "explanation": "All three products are included. Your final answer is 82,002."
         }
       ]
     },
@@ -457,70 +457,70 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       "answer": "99242",
       "steps": [
         {
-          "title": "百位块先乘 3",
+          "title": "Start the hundreds: multiply by 3",
           "calculation": "286 × 3",
           "answer": "858",
-          "explanation": "347 = 300 + 40 + 7。先算百位块。"
+          "explanation": "347 = 300 + 40 + 7. Begin with the hundreds product."
         },
         {
-          "title": "乘 100，设定总数",
+          "title": "Multiply by 100 to set the total",
           "calculation": "858 × 100",
           "answer": "85800",
-          "explanation": "总数先记为 85,800。"
+          "explanation": "Set your running total to 85,800."
         },
         {
-          "title": "十位块先乘 4",
+          "title": "Start the tens: multiply by 4",
           "calculation": "286 × 4",
           "answer": "1144",
-          "explanation": "沿用第 1 阶练过的三位数 × 一位数。"
+          "explanation": "Use the three-digit × one-digit skill you practised in Stage 1."
         },
         {
-          "title": "乘 10，得到十位块",
+          "title": "Multiply by 10 for the tens product",
           "calculation": "1144 × 10",
           "answer": "11440",
-          "explanation": "把 11,440 拆成 10,000 + 1,000 + 400 + 40。"
+          "explanation": "Split 11,440 into 10,000 + 1,000 + 400 + 40."
         },
         {
-          "title": "先加 10,000",
+          "title": "Add 10,000 first",
           "calculation": "85800 + 10000",
           "answer": "95800",
-          "explanation": "总数更新为 95,800。"
+          "explanation": "Update your total to 95,800."
         },
         {
-          "title": "再加 1,000",
+          "title": "Then add 1,000",
           "calculation": "95800 + 1000",
           "answer": "96800",
-          "explanation": "总数更新为 96,800。"
+          "explanation": "Update your total to 96,800."
         },
         {
-          "title": "加 400，处理跨千进位",
+          "title": "Add 400 across the next thousand",
           "calculation": "96800 + 400",
           "answer": "97200",
-          "explanation": "先加 200 到 97,000，再加 200，得到 97,200。"
+          "explanation": "Add 200 to reach 97,000, then another 200 to get 97,200."
         },
         {
-          "title": "补上 40，十位块完成",
+          "title": "Add 40 to finish the tens product",
           "calculation": "97200 + 40",
           "answer": "97240",
-          "explanation": "更新并记住 97,240；现在才开始个位块。"
+          "explanation": "Keep the updated total, 97,240. Now you can start the ones product."
         },
         {
-          "title": "算个位块",
+          "title": "Find the ones product",
           "calculation": "286 × 7",
           "answer": "2002",
-          "explanation": "1,400 + 560 + 42 = 2,002。只需要加 2,000 和 2。"
+          "explanation": "1,400 + 560 + 42 = 2,002. You only need to add 2,000 and 2."
         },
         {
-          "title": "加 2,000",
+          "title": "Add 2,000",
           "calculation": "97240 + 2000",
           "answer": "99240",
-          "explanation": "总数更新为 99,240。"
+          "explanation": "Update your total to 99,240."
         },
         {
-          "title": "最后加 2",
+          "title": "Add the final 2",
           "calculation": "99240 + 2",
           "answer": "99242",
-          "explanation": "全部完成，答案是 99,242。"
+          "explanation": "All parts are complete. The answer is 99,242."
         }
       ]
     },
@@ -528,17 +528,17 @@ export const MULTIPLICATION_LESSONS: Lesson[] = [
       {
         "expression": "123 × 234",
         "answer": "28782",
-        "explanation": "先记 24,600。十位块 3,690：27,600 → 28,200 → 28,290。个位块 492：28,690 → 28,780 → 28,782。"
+        "explanation": "Start with 24,600. Add the tens product, 3,690: 27,600 → 28,200 → 28,290. Then add the ones product, 492: 28,690 → 28,780 → 28,782."
       },
       {
         "expression": "248 × 367",
         "answer": "91016",
-        "explanation": "先记 74,400。十位块 14,880：84,400 → 88,400 → 89,200 → 89,280。个位块 1,736：90,280 → 90,980 → 91,010 → 91,016。"
+        "explanation": "Start with 74,400. Add the tens product, 14,880: 84,400 → 88,400 → 89,200 → 89,280. Then add the ones product, 1,736: 90,280 → 90,980 → 91,010 → 91,016."
       },
       {
         "expression": "367 × 458",
         "answer": "168086",
-        "explanation": "先记 146,800。十位块 18,350：156,800 → 164,800 → 165,100 → 165,150。个位块 2,936：167,150 → 168,050 → 168,080 → 168,086。"
+        "explanation": "Start with 146,800. Add the tens product, 18,350: 156,800 → 164,800 → 165,100 → 165,150. Then add the ones product, 2,936: 167,150 → 168,050 → 168,080 → 168,086."
       }
     ],
     "multiplicationStage": "triple-general"

@@ -10,7 +10,7 @@ export function createLearningRound(): LearningRound {
 }
 export function answerLearningStep(state: LearningRound, input: string, expected: string): LearningRound {
   if (state.complete || state.feedback === "correct" || state.feedback === "revealed") return state;
-  if (!parseAnswer(input)) throw new Error("输入一个数或精确分数，例如 3/4。");
+  if (!parseAnswer(input)) throw new Error("Enter a number or an exact fraction, such as 3/4.");
   const answer = parseAnswer(expected);
   if (!answer) throw new Error("This lesson answer is invalid.");
   const correct = isCorrect(input, answer);

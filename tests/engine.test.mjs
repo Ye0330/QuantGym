@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CATEGORIES, GENERATOR_VERSION, rational, formatAnswer, formatQuestionAnswer, decimalMultiplicationQuestion, decimalDivisionQuestion, isCurrentGeneration, parseAnswer, isCorrect, seededRandom, generateQuestion, createRun, advanceRun, continueAfterExplanation, finishRun, summarize, adaptLevel, chooseCategory, unresolvedMistakes } from '../lib/quant-engine.ts';
+import { CATEGORIES, GENERATOR_VERSION, rational, formatAnswer, formatQuestionAnswer, questionExplanation, decimalMultiplicationQuestion, decimalDivisionQuestion, isCurrentGeneration, parseAnswer, isCorrect, seededRandom, generateQuestion, createRun, advanceRun, continueAfterExplanation, finishRun, summarize, adaptLevel, chooseCategory, unresolvedMistakes } from '../lib/quant-engine.ts';
 import { sessionSchema } from '../lib/session-validation.ts';
 import { focusCategories, focusLabel, isValidFocus, normalizeFocus, sameFocus, toggleFocus, questionKey, normalizeConfig, MULTIPLICATION_STAGES, usesChoices, sameAnswerMode } from '../lib/quant-engine.ts';
 import { answerChoices, questionChoices } from '../lib/answer-choices.ts';
@@ -619,4 +619,34 @@ test('sequence family variety, visible-term rules, and constant-RNG no-repeat fa
       run = step.run; assert.equal(step.finished, i === 79);
     }
   }
+});
+
+
+test('legacy sequence explanations render in English without changing saved questions', () => {
+  const families = new Set();
+  for (const level of [1, 2, 3]) {
+    const random = seededRandom(197);
+    for (let i = 0; i < 100; i++) {
+      const current = generateQuestion('sequences', level, random, String(i));
+      const legacy = { ...structuredClone(current), explanation: '\u65e7\u89e3\u6790' };
+      const before = structuredClone(legacy);
+      assert.equal(questionExplanation(legacy), current.explanation, current.sequenceFamily);
+      assert.deepEqual(legacy, before, 'display localization must preserve stored and exported data');
+      assert.equal(questionExplanation(current), current.explanation, 'current English text is kept');
+      const untagged = { ...legacy };
+      delete untagged.sequenceFamily;
+      assert.equal(questionExplanation(untagged), current.explanation, 'older untagged rules remain readable');
+      families.add(current.sequenceFamily);
+    }
+  }
+  assert.equal(families.size, 6);
+});
+
+test('legacy explanations do not invent a method for inconsistent or unsupported records', () => {
+  const current = generateQuestion('sequences', 1, seededRandom(9), 'legacy');
+  const inconsistent = { ...current, explanation: '\u65e7\u89e3\u6790', answer: { n: current.answer.n + 1, d: 1 } };
+  assert.match(questionExplanation(inconsistent), /^The expected answer is /);
+  assert.match(questionExplanation({ ...inconsistent, expression: 'invalid, ?' }), /^The expected answer is /);
+  assert.match(questionExplanation({ ...inconsistent, category: 'addition' }), /^The expected answer is /);
+  assert.equal(/\p{Script=Han}/u.test(questionExplanation(inconsistent)), false);
 });

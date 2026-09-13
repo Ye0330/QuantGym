@@ -6,8 +6,8 @@ export type Level = 1 | 2 | 3;
 export const MULTIPLICATION_STAGES = ["triple-single", "triple-double", "triple-near-hundred", "triple-general"] as const;
 export type MultiplicationStage = (typeof MULTIPLICATION_STAGES)[number];
 export const STAGE_LABELS: Record<MultiplicationStage, string> = {
-  "triple-single": "1 · 三位数 × 一位数", "triple-double": "2 · 三位数 × 两位数",
-  "triple-near-hundred": "3 · 接近整百的三位数乘法", "triple-general": "4 · 一般三位数 × 三位数",
+  "triple-single": "1 · 3-digit × 1-digit", "triple-double": "2 · 3-digit × 2-digit",
+  "triple-near-hundred": "3 · Near a multiple of 100", "triple-general": "4 · 3-digit × 3-digit",
 };
 export function isMultiplicationStage(value: unknown): value is MultiplicationStage { return MULTIPLICATION_STAGES.includes(value as MultiplicationStage); }
 export type Mode = "sprint" | "adaptive" | "challenge" | "practice" | "review";
@@ -79,6 +79,44 @@ export function formatAnswer(a: Rational, style?: "decimal"): string {
   return `${a.n}/${a.d}`;
 }
 export function formatQuestionAnswer(question: Question): string { return formatAnswer(question.answer, question.answerFormat); }
+/** Translate legacy display text without changing saved records or backup identities. */
+export function questionExplanation(question: Question): string {
+  if (!/\p{Script=Han}/u.test(question.explanation)) return question.explanation;
+  const fallback = `The expected answer is ${formatQuestionAnswer(question)}. Open Learn to review a worked method for this skill.`;
+  if (question.category !== "sequences") return fallback;
+  const parts = question.expression.split(",").map(part => part.trim());
+  if (parts.pop() !== "?" || parts.length < 5 || parts.some(part => !/^[-+]?\d+$/.test(part))) return fallback;
+  const terms = parts.map(Number), last = terms.at(-1)!, next = question.answer.n / question.answer.d;
+  const differences = terms.slice(1).map((term, index) => term - terms[index]);
+  const families = question.sequenceFamily ? [question.sequenceFamily] : ["arithmetic", "geometric", "growing-difference", "alternating", "multiply-add", "interleaved"];
+  for (const family of families) {
+    const first = differences[0];
+    if (family === "arithmetic" && differences.every(value => value === first) && next === last + first) {
+      return `Add ${first} each time. Continue with the same difference: ${last} + ${first} = ${next}.`;
+    }
+    if (family === "geometric") {
+      const ratio = terms[1] / terms[0];
+      if (Number.isFinite(ratio) && terms.slice(1).every((term, index) => term === terms[index] * ratio) && next === last * ratio) return `Multiply each term by ${ratio}: ${last} × ${ratio} = ${next}.`;
+    }
+    if (family === "growing-difference") {
+      const increase = differences[1] - first, step = differences.at(-1)! + increase;
+      if (increase > 0 && differences.every((value, index) => value === first + index * increase) && next === last + step) return `Look at the differences: ${differences.join(", ")}. Each difference increases by ${increase}, so the next difference is ${step}. Therefore, ${last} + ${step} = ${next}.`;
+    }
+    if (family === "alternating") {
+      const second = differences[1], step = differences[differences.length % 2];
+      if (first !== second && differences.every((value, index) => value === differences[index % 2]) && next === last + step) return `Alternate between adding ${first} and adding ${second}. The last step added ${differences.at(-1)!}, so add ${step} next: ${last} + ${step} = ${next}.`;
+    }
+    if (family === "multiply-add") {
+      const ratio = differences[1] / first, extra = terms[1] - terms[0] * ratio;
+      if (Number.isFinite(ratio) && terms.slice(1).every((term, index) => term === terms[index] * ratio + extra) && next === last * ratio + extra) return `Multiply by ${ratio}, then add ${extra} each time. For example, ${terms[0]} × ${ratio} + ${extra} = ${terms[1]}. Apply the same rule: ${last} × ${ratio} + ${extra} = ${next}.`;
+    }
+    if (family === "interleaved" && terms.length === 6) {
+      const oddStep = terms[2] - terms[0], evenStep = terms[3] - terms[1];
+      if (terms[4] === terms[2] + oddStep && terms[5] === terms[3] + evenStep && next === terms[4] + oddStep) return `Separate the odd and even positions. Terms 1, 3 and 5 are ${terms[0]}, ${terms[2]} and ${terms[4]}, increasing by ${oddStep}. Terms 2, 4 and 6 increase by ${evenStep}. Term 7 continues the first group: ${terms[4]} + ${oddStep} = ${next}.`;
+    }
+  }
+  return fallback;
+}
 export function isCurrentGeneration(session: Session): boolean { return session.generatorVersion === GENERATOR_VERSION; }
 export function difficultyDescription(focus: Focus, level: Level): string {
   if (focus === "sequences") return ["Find the next term: constant additions or multiplications. Always four choices.", "Increasing differences and alternating steps. Always four choices.", "Multiply-then-add rules and interleaved sequences. Always four choices."][level - 1];
@@ -161,30 +199,30 @@ function sequenceQuestion(level: Level, random: () => number, id: string): Quest
   if (family === "arithmetic") {
     const start = integer(random, 2, 80), difference = integer(random, 2, 18);
     for (let i = 0; i < 6; i++) terms.push(start + difference * i);
-    explanation = `相邻两项都增加 ${difference}。沿用同一个差：${terms[4]} + ${difference} = ${terms[5]}。`;
+    explanation = `Add ${difference} each time. Continue with the same difference: ${terms[4]} + ${difference} = ${terms[5]}.`;
   } else if (family === "geometric") {
     const start = integer(random, 2, 12), ratio = integer(random, 2, 4);
     for (let i = 0; i < 6; i++) terms.push(start * ratio ** i);
-    explanation = `每一项都是前一项的 ${ratio} 倍：${terms[4]} × ${ratio} = ${terms[5]}。`;
+    explanation = `Multiply each term by ${ratio}: ${terms[4]} × ${ratio} = ${terms[5]}.`;
   } else if (family === "growing-difference") {
     const start = integer(random, 2, 40), first = integer(random, 2, 12), increase = integer(random, 1, 6);
     terms.push(start);
     for (let i = 0; i < 5; i++) terms.push(terms.at(-1)! + first + i * increase);
-    explanation = `先看相邻差：${Array.from({ length: 4 }, (_, i) => first + i * increase).join("、")}。差每次增加 ${increase}，下一个差是 ${first + 4 * increase}，所以 ${terms[4]} + ${first + 4 * increase} = ${terms[5]}。`;
+    explanation = `Look at the differences: ${Array.from({ length: 4 }, (_, i) => first + i * increase).join(", ")}. Each difference increases by ${increase}, so the next difference is ${first + 4 * increase}. Therefore, ${terms[4]} + ${first + 4 * increase} = ${terms[5]}.`;
   } else if (family === "alternating") {
     const start = integer(random, 10, 80), first = integer(random, 2, 16), second = first + integer(random, 2, 9);
     terms.push(start);
     for (let i = 0; i < 6; i++) terms.push(terms.at(-1)! + (i % 2 ? second : first));
-    explanation = `增量轮流是 +${first}、+${second}。刚用过 +${first}，接下来用 +${second}：${terms[5]} + ${second} = ${terms[6]}。`;
+    explanation = `Alternate between adding ${first} and adding ${second}. The last step added ${first}, so add ${second} next: ${terms[5]} + ${second} = ${terms[6]}.`;
   } else if (family === "multiply-add") {
     const start = integer(random, 2, 12), ratio = integer(random, 2, 3), extra = integer(random, 1, 9);
     terms.push(start);
     for (let i = 0; i < 5; i++) terms.push(terms.at(-1)! * ratio + extra);
-    explanation = `每次先乘 ${ratio}，再加 ${extra}。例如 ${terms[0]} × ${ratio} + ${extra} = ${terms[1]}；同样地，${terms[4]} × ${ratio} + ${extra} = ${terms[5]}。`;
+    explanation = `Multiply by ${ratio}, then add ${extra} each time. For example, ${terms[0]} × ${ratio} + ${extra} = ${terms[1]}. Apply the same rule: ${terms[4]} × ${ratio} + ${extra} = ${terms[5]}.`;
   } else {
     const odd = integer(random, 5, 60), even = integer(random, 100, 180), oddStep = integer(random, 2, 15), evenStep = oddStep + integer(random, 2, 8);
     for (let i = 0; i < 7; i++) terms.push(i % 2 ? even + Math.floor(i / 2) * evenStep : odd + Math.floor(i / 2) * oddStep);
-    explanation = `分开看位置：第 1、3、5 项是 ${terms[0]}、${terms[2]}、${terms[4]}，每次 +${oddStep}；第 2、4、6 项每次 +${evenStep}。空缺在第 7 项，应接第一组：${terms[4]} + ${oddStep} = ${terms[6]}。`;
+    explanation = `Separate the odd and even positions. Terms 1, 3 and 5 are ${terms[0]}, ${terms[2]} and ${terms[4]}, increasing by ${oddStep}. Terms 2, 4 and 6 increase by ${evenStep}. Term 7 continues the first group: ${terms[4]} + ${oddStep} = ${terms[6]}.`;
   }
   return { id, category: "sequences", level, sequenceFamily: family, expression: `${terms.slice(0, -1).join(", ")}, ?`, answer: rational(terms.at(-1)!), explanation };
 }
