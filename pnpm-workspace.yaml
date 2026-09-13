@@ -1,0 +1,10 @@
+minimumReleaseAge: 10080
+minimumReleaseAgeIgnoreMissingTime: false
+trustLockfile: false
+strictDepBuilds: true
+allowBuilds:
+  esbuild: true
+  fsevents: true
+verifyDepsBeforeRun: false
+optimisticRepeatInstall: false
+packageImportMethod: clone-or-copy

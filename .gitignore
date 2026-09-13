@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env*
+*.log
+.DS_Store
+quantgym-backup-*.json
+quantgym-recovery-*.json
